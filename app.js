@@ -1,22 +1,25 @@
 var button = 0;
 var led = 2;
-var send = function(){
+var wsurl = 'ws://dev.thgab.com:8080';
+var send = function () {
 	ws.send('blink')
 }
-GPIO.setMode(led, 0, 0);
+GPIO.setMode(led, GPIO.OUT, GPIO.FLOAT);
+GPIO.setMode(button, GPIO.IN, GPIO.PULLUP);
 GPIO.write(led, 0);
 
-var ws = new WebSocket('ws://dev.thgab.com:8080');
+var ws = new WebSocket(wsurl);
 
-ws.onopen = function(ev) {
-GPIO.setMode(button, 1, 1);
-GPIO.setISR(button, 2, send);
-	ws.send('hello');
+ws.onopen = function (ev) {
+	GPIO.setISR(button, GPIO.NEGEDGE, send);
+	ws.send('blinkR');
 };
 
-ws.onmessage = function(ev) {
-	if(ev.data == 'blink'){
+ws.onmessage = function (ev) {
+	if (ev.data == 'blink') {
 		GPIO.write(led, 1);
-		var xt = setTimeout(function() { GPIO.write(led, 0); }, 500);
+		var xt = setTimeout(function () {
+			GPIO.write(led, 0);
+		}, 500);
 	}
 };
