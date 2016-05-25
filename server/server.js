@@ -14,7 +14,7 @@ wss.on('connection', function (ws) {
 
 var BlinkRServer = {
 	blinkR: function (ws,params) {
-		if (!params.length || params[0] != 'noname') {
+		if (!params.length || params[0] == 'noname') {
 			var clientId = uniqid();
 			ws.send('rename:' + clientId);
 		} else {
