@@ -38,4 +38,4 @@ var File = {
 	},
 }
 
-var emulation = 'ws://localhost:8080'
+var wsurlLocal = 'ws://localhost:8080'
