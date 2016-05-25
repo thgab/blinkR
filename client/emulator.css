@@ -1,0 +1,9 @@
+.led {
+	width: 20px;
+	height: 20px;
+	background-color: gray;
+	border-radius: 10px;
+}
+.led on{
+	background-color: red;
+}
