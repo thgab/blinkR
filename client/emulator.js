@@ -3,8 +3,11 @@ var GPIO = {
 	IN : 0,
 	FLOAT: 0,
 	NEGEDGE: 0,
-	setMode: function(){},
+	setMode: function(){
+		console.log(arguments);
+	},
 	write: function(led,level){
+		console.log(arguments);
 		if(level){
 			$('#led').addClass('on');
 		}else{
@@ -12,14 +15,21 @@ var GPIO = {
 		}
 	},
 	setISR: function(button, edge, send){
+		console.log(arguments);
 		$('#button').click(send);
 	}
 }
 
 var File = {
-	open: function(){},
-	read: function(){},
-	write: function(){}
+	open: function(){
+		console.log(arguments);
+	},
+	read: function(){
+		console.log(arguments);
+	},
+	write: function(){
+		console.log(arguments);
+	}
 }
 
 var emulation = 'ws://localhost:8080'
