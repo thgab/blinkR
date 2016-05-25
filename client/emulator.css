@@ -4,6 +4,6 @@
 	background-color: gray;
 	border-radius: 10px;
 }
-.led on{
+.led.on{
 	background-color: red;
 }

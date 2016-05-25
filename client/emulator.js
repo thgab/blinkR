@@ -1,7 +1,8 @@
 var GPIO = {
 	OUT : 0,
-	IN : 1,
+	IN : 0,
 	FLOAT: 0,
+	NEGEDGE: 0,
 	setMode: function(){},
 	write: function(led,level){
 		if(level){
@@ -9,6 +10,9 @@ var GPIO = {
 		}else{
 			$('#led').removeClass('on');
 		}
+	},
+	setISR: function(button, edge, send){
+		$('#button').click(send);
 	}
 }
 
@@ -18,4 +22,4 @@ var File = {
 	write: function(){}
 }
 
-
+var emulation = 'ws://localhost:8080'

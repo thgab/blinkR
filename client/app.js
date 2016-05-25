@@ -1,6 +1,6 @@
 var button = 0;
 var led = 2;
-var wsurl = 'ws://dev.thgab.com:8080';
+var wsurl = emulation || 'ws://dev.thgab.com:8080';
 var send = function () {
 	ws.send('blink')
 }

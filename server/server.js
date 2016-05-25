@@ -6,16 +6,14 @@ wss.on('connection', function (ws) {
 	ws.on('message', function (message) {
 		var evdata = message.split(':');
 		var evfunction = evdata.shift();
-		var evdata = ev.data.split(':');
-		var evfunction = evdata.shift();
 		if (typeof BlinkRServer[evfunction] === 'function') {
-			BlinkRServer[evfunction](evdata);
+			BlinkRServer[evfunction](ws,evdata);
 		}
 	});
 });
 
 var BlinkRServer = {
-	blinkR: function (params) {
+	blinkR: function (ws,params) {
 		if (!params.length || params[0] != 'noname') {
 			var clientId = uniqid();
 			ws.send('rename:' + clientId);
@@ -24,7 +22,7 @@ var BlinkRServer = {
 		}
 		Clients[clientId] = ws;
 	},
-	blink: function () {
+	blink: function (ws) {
 		ws.send('blink');
 	}
 }
