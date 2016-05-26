@@ -26,7 +26,11 @@ var BlinkRServer = {
 	},
 	blink: function (ws, params) {
 		if(typeof ws.clientId === 'undefined' && params.length && typeof Clients[params[0]] !== 'undefined'){
-			Clients[params[0]].send('blink');
+			if (Clients[params[0]].readyState == 1) {
+				Clients[params[0]].send('blink');
+			}else{
+				delete Clients[params[0]];
+			}
 		}else{
 			ws.send('blink');
 		}
