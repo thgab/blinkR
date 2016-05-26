@@ -21,9 +21,24 @@ var BlinkRServer = {
 			var clientId = params[0];
 		}
 		Clients[clientId] = ws;
+		ws.clientId = clientId;
+		console.log(ws.clientId);
 	},
-	blink: function (ws) {
-		ws.send('blink');
+	blink: function (ws, params) {
+		if(typeof ws.clientId === 'undefined' && params.length && typeof Clients[params[0]] !== 'undefined'){
+			Clients[params[0]].send('blink');
+		}else{
+			ws.send('blink');
+		}
+	},
+	list: function (ws, params) {
+		var list = [];
+		for(var clientId in Clients) {
+			if (Clients.hasOwnProperty(clientId)) {
+				list.push(clientId);
+			}
+		}
+		ws.send(list.toString());
 	}
 }
 
